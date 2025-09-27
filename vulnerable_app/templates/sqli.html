@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Vulnerability</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        input[type="text"] { padding: 8px; margin-top: 5px; }
+        input[type="submit"] { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 10px; background-color: #f8f9fa; border: 1px dashed #ccc; }
+        .back-link { display: block; margin-top: 20px; }
+        .error { color: red; font-weight: bold; }
+        .user-info { margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SQL Injection Vulnerability</h1>
+        <p>Enter a user ID to retrieve user information.</p>
+        <form action="/sqli" method="GET">
+            <label for="id">User ID:</label>
+            <input type="text" id="id" name="id" value="{{ user_id | default('1') }}">
+            <input type="submit" value="Get User">
+        </form>
+        
+        {% if user_info %}
+            <div class="result">
+                <h3>User Information:</h3>
+                {% if error_message %}
+                    <p class="error">{{ error_message }}</p>
+                {% else %}
+                    <div class="user-info">
+                        <p><strong>ID:</strong> {{ user_info.id }}</p>
+                        <p><strong>Username:</strong> {{ user_info.username }}</p>
+                        <p><strong>Email:</strong> {{ user_info.email }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% elif user_id %}
+            <div class="result">
+                <p>No user found with ID: {{ user_id }}</p>
+            </div>
+        {% endif %}
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>

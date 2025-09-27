@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable App Home</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Vulnerable Web Application!</h1>
+    <p>This application contains intentional vulnerabilities for testing purposes.</p>
+    <h2>Vulnerability Examples:</h2>
+    <ul>
+        <li><a href="/xss">Reflected XSS Page</a> (Try injecting <code>&lt;script&gt;alert(document.domain)&lt;/script&gt;</code> into the 'query' parameter)</li>
+        <li><a href="/sqli?id=1">SQL Injection Page</a> (Try injecting <code>1 OR 1=1--</code> or <code>1' UNION SELECT 1,database(),user()--</code> into the 'id' parameter)</li>
+        <li><a href="/">Home</a></li>
+    </ul>
+</body>
+</html>
